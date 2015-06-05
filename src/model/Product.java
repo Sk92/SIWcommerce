@@ -1,42 +1,35 @@
 package model;
 
+import javax.persistence.*;
+import java.math.BigInteger;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-
-@ManagedBean(name = "product", eager = true)
-@RequestScoped
+/**
+ * Created by alessandro on 05/06/15.
+ */
+@Entity
+@NamedQuery(name="Product.getAllProducts", query="SELECT p FROM Product p")
+@Table(name = "products", schema = "public", catalog = "smcommerce")
 public class Product {
-
-    private Long id;
+    private BigInteger id;
     private String name;
     private String code;
-    private Float price;
     private String description;
-    private int quantity;
+    private Double price;
+    private int stockQuantity;
 
-
-    public Product() {
-
-    }
-
-    public Product(String name, String code, Float price, String description, int quantity) {
-        this.name = name;
-        this.code = code;
-        this.price = price;
-        this.description = description;
-        this.quantity = quantity;
-    }
-
-    public Long getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -45,6 +38,8 @@ public class Product {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -53,14 +48,8 @@ public class Product {
         this.code = code;
     }
 
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -69,11 +58,35 @@ public class Product {
         this.description = description;
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Basic
+    @Column(name = "price")
+    public Double getPrice() {
+        return price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    @Basic
+    @Column(name = "stock_quantity")
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        //TODO
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        //TODO
+        return 1;
     }
 }
