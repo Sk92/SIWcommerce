@@ -1,4 +1,4 @@
-CREATE TABLE clients
+CREATE TABLE customers
 (
     id NUMERIC(131089) PRIMARY KEY NOT NULL,
     address CHAR(40),
@@ -24,7 +24,7 @@ CREATE TABLE orders
     created_at DATE,
     closed_at DATE,
     processed_at DATE,
-    client_id NUMERIC(131089)
+    customer_id NUMERIC(131089)
 );
 CREATE TABLE products
 (
@@ -53,9 +53,9 @@ CREATE TABLE users
     created_at DATE,
     role CHAR(40)
 );
-ALTER TABLE clients ADD FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE customers ADD FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE order_lines ADD FOREIGN KEY (order_id) REFERENCES orders (id);
 ALTER TABLE order_lines ADD FOREIGN KEY (product_id) REFERENCES products (id);
-ALTER TABLE orders ADD FOREIGN KEY (client_id) REFERENCES clients (id);
+ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers (id);
 ALTER TABLE providers ADD FOREIGN KEY (order_id) REFERENCES orders (id);
 ALTER TABLE providers ADD FOREIGN KEY (product_id) REFERENCES products (id);

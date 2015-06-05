@@ -5,9 +5,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Collection;
 
-/**
- * Created by alessandro on 05/06/15.
- */
+
 @Entity
 @Table(name = "orders", schema = "public", catalog = "smcommerce")
 public class Order {
@@ -16,7 +14,7 @@ public class Order {
     private Date closedAt;
     private Date processedAt;
     private Collection<OrderLine> orderRowsesById;
-    private Client clientsByClientId;
+    private Customer customersByCustomerId;
     private Collection<Provider> providersesById;
 
     @Id
@@ -93,13 +91,13 @@ public class Order {
     }
 
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    public Client getClientsByClientId() {
-        return clientsByClientId;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    public Customer getCustomersByCustomerId() {
+        return customersByCustomerId;
     }
 
-    public void setClientsByClientId(Client clientsByClientId) {
-        this.clientsByClientId = clientsByClientId;
+    public void setCustomersByCustomerId(Customer clientsByCustomerId) {
+        this.customersByCustomerId = clientsByCustomerId;
     }
 
     @OneToMany(mappedBy = "ordersByOrderId")

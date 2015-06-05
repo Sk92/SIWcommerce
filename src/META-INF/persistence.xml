@@ -3,7 +3,7 @@
 
     <persistence-unit name="smcommerce-unit">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-        <class>model.Client</class>
+        <class>model.Customer</class>
         <class>model.OrderLine</class>
         <class>model.Order</class>
         <class>model.Product</class>

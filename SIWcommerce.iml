@@ -17,7 +17,7 @@
         <setting name="provider-name" value="OpenJPA" />
         <datasource-mapping>
           <factory-entry name="NewPersistenceUnit" value="26513f5a-4490-4141-9255-92d1ab2596bc" />
-          <factory-entry name="smcommerce-unit" />
+          <factory-entry name="smcommerce-unit" value="26513f5a-4490-4141-9255-92d1ab2596bc" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
       </configuration>

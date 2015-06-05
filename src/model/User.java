@@ -18,7 +18,7 @@ public class User {
     private String lastName;
     private Date createdAt;
     private String role;
-    private Collection<Client> clientsesById;
+    private Collection<Customer> clientsesById;
 
     @Id
     @Column(name = "id")
@@ -121,11 +121,11 @@ public class User {
     }
 
     @OneToMany(mappedBy = "usersByUserId")
-    public Collection<Client> getClientsesById() {
+    public Collection<Customer> getClientsesById() {
         return clientsesById;
     }
 
-    public void setClientsesById(Collection<Client> clientsesById) {
+    public void setClientsesById(Collection<Customer> clientsesById) {
         this.clientsesById = clientsesById;
     }
 }

@@ -7,8 +7,8 @@ import java.util.Collection;
 
 
 @Entity
-@Table(name = "clients", schema = "public", catalog = "smcommerce")
-public class Client {
+@Table(name = "customers", schema = "public", catalog = "smcommerce")
+public class Customer {
     private BigInteger id;
     private String address;
     private Date dateOfBirth;
@@ -50,11 +50,11 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Client client = (Client) o;
+        Customer customer = (Customer) o;
 
-        if (address != null ? !address.equals(client.address) : client.address != null) return false;
-        if (dateOfBirth != null ? !dateOfBirth.equals(client.dateOfBirth) : client.dateOfBirth != null) return false;
-        if (id != null ? !id.equals(client.id) : client.id != null) return false;
+        if (address != null ? !address.equals(customer.address) : customer.address != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(customer.dateOfBirth) : customer.dateOfBirth != null) return false;
+        if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
 
         return true;
     }
@@ -77,7 +77,7 @@ public class Client {
         this.usersByUserId = usersByUserId;
     }
 
-    @OneToMany(mappedBy = "clientsByClientId")
+    @OneToMany(mappedBy = "getCustomersByCustomerId")
     public Collection<Order> getOrdersesById() {
         return ordersesById;
     }
