@@ -15,7 +15,7 @@ public class Order {
     private Date createdAt;
     private Date closedAt;
     private Date processedAt;
-    private Collection<OrderRow> orderRowsesById;
+    private Collection<OrderLine> orderRowsesById;
     private Client clientsByClientId;
     private Collection<Provider> providersesById;
 
@@ -84,11 +84,11 @@ public class Order {
     }
 
     @OneToMany(mappedBy = "ordersByOrderId")
-    public Collection<OrderRow> getOrderRowsesById() {
+    public Collection<OrderLine> getOrderRowsesById() {
         return orderRowsesById;
     }
 
-    public void setOrderRowsesById(Collection<OrderRow> orderRowsesById) {
+    public void setOrderRowsesById(Collection<OrderLine> orderRowsesById) {
         this.orderRowsesById = orderRowsesById;
     }
 

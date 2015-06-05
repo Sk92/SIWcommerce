@@ -5,9 +5,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Collection;
 
-/**
- * Created by alessandro on 05/06/15.
- */
+
 @Entity
 @Table(name = "clients", schema = "public", catalog = "smcommerce")
 public class Client {
