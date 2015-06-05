@@ -1,9 +1,10 @@
 package model;
 
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.Entity;
+
 
 @ManagedBean(name = "product", eager = true)
 @RequestScoped
