@@ -1,47 +1,32 @@
 package model;
 
+import javax.persistence.*;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.Collection;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "customer", eager = true)
-@RequestScoped
+@Entity
+@Table(name = "customers", schema = "public", catalog = "smcommerce")
 public class Customer {
-    private String name;
-    private String surname;
+    private BigInteger id;
     private String address;
-    private String email;
-    private String date_of_birth;
-    private String date_of_registration;
+    private Date dateOfBirth;
+    private User usersByUserId;
+    private Collection<Order> ordersesById;
 
-    public Customer(){
+    @Id
+    @Column(name = "id")
+    public BigInteger getId() {
+        return id;
     }
 
-    public Customer(String name, String surname, String address, String email, String date_of_birth, String date_of_registration) {
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.email = email;
-        this.date_of_birth = date_of_birth;
-        this.date_of_registration = date_of_registration;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
+    @Basic
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -50,27 +35,54 @@ public class Customer {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
+    @Basic
+    @Column(name = "date_of_birth")
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getDate_of_birth() {
-        return date_of_birth;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (address != null ? !address.equals(customer.address) : customer.address != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(customer.dateOfBirth) : customer.dateOfBirth != null) return false;
+        if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
+
+        return true;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
+        return result;
     }
 
-    public String getDate_of_registration() {
-        return date_of_registration;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getUsersByUserId() {
+        return usersByUserId;
     }
 
-    public void setDate_of_registration(String date_of_registration) {
-        this.date_of_registration = date_of_registration;
+    public void setUsersByUserId(User usersByUserId) {
+        this.usersByUserId = usersByUserId;
+    }
+
+    @OneToMany(mappedBy = "getCustomersByCustomerId")
+    public Collection<Order> getOrdersesById() {
+        return ordersesById;
+    }
+
+    public void setOrdersesById(Collection<Order> ordersesById) {
+        this.ordersesById = ordersesById;
     }
 }

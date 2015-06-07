@@ -1,56 +1,36 @@
 package controller;
 
-
-import facades.ProductFacade;
 import model.Product;
+import model.ProductFacade;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.ejb.EJB;
 import java.util.List;
 
-@ManagedBean(name = "productController", eager = true)
+@ManagedBean
 public class ProductController {
-
-    @ManagedProperty(value="#{param.id}")
-    private Long id;
-    private String name;
-    private Float price;
-    private String description;
-    private String code;
-    private Product product;
-    private List<Product> products;
-    private int quantity;
 
     @EJB
     private ProductFacade productFacade;
+    private String name;
+    private Double price;
+    private String description;
+    private String code;
+    private int stockQuantity;
+    private Product product;
+    private List<Product> productList;
 
     public String createProduct() {
-        this.product = productFacade.createProduct(name, code, price, description,quantity);
-        return "product";
-    }
-
-    public String listProducts() {
-        this.products = productFacade.getAllProducts();
+        this.product = productFacade.createProduct(name, code, description, price, stockQuantity);
         return "products";
     }
 
-    public String findProduct() {
-        this.product = productFacade.getProduct(id);
-        return "product";
+    public ProductFacade getProductFacade() {
+        return productFacade;
     }
 
-    public String findProduct(Long id) {
-        this.product = productFacade.getProduct(id);
-        return "product";
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductFacade(ProductFacade productFacade) {
+        this.productFacade = productFacade;
     }
 
     public String getName() {
@@ -61,11 +41,11 @@ public class ProductController {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -85,6 +65,14 @@ public class ProductController {
         this.code = code;
     }
 
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -93,15 +81,11 @@ public class ProductController {
         this.product = product;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Product> getProductList() {
+        return productFacade.getProductList();
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public String moveToAggiungiProdotto(){
-        return "aggiungiProdotto";
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 }

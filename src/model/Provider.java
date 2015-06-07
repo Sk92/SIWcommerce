@@ -3,10 +3,12 @@ package model;
 import javax.persistence.*;
 import java.math.BigInteger;
 
-
+/**
+ * Created by alessandro on 05/06/15.
+ */
 @Entity
-@Table(name = "order_lines", schema = "public", catalog = "smcommerce")
-public class OrderLine {
+@Table(name = "providers", schema = "public", catalog = "smcommerce")
+public class Provider {
     private BigInteger id;
     private Double sellPrice;
     private BigInteger quantity;
@@ -48,11 +50,11 @@ public class OrderLine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderLine orderLine = (OrderLine) o;
+        Provider provider = (Provider) o;
 
-        if (id != null ? !id.equals(orderLine.id) : orderLine.id != null) return false;
-        if (quantity != null ? !quantity.equals(orderLine.quantity) : orderLine.quantity != null) return false;
-        if (sellPrice != null ? !sellPrice.equals(orderLine.sellPrice) : orderLine.sellPrice != null) return false;
+        if (id != null ? !id.equals(provider.id) : provider.id != null) return false;
+        if (quantity != null ? !quantity.equals(provider.quantity) : provider.quantity != null) return false;
+        if (sellPrice != null ? !sellPrice.equals(provider.sellPrice) : provider.sellPrice != null) return false;
 
         return true;
     }

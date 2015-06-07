@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="smcommerce-unit">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <class>model.Customer</class>
+        <class>model.OrderLine</class>
+        <class>model.Order</class>
+        <class>model.Product</class>
+        <class>model.Provider</class>
+        <class>model.User</class>
+        <properties>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/smcommerce"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="postgres"/>
+            <property name="openjpa.ConnectionPassword" value="postgres"/>
+            <property name="openjpa.Log" value="DefaultLevel=TRACE, Tool=INFO"/>
+        </properties>
+    </persistence-unit>
+</persistence>

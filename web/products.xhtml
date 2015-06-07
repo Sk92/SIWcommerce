@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/templates/default/main.xhtml">
+    <ui:define name="content">
+
+
+        <h:dataTable value="#{productController.productList}" var="product"
+                     styleClass="productTable"
+                     headerClass="productTableHeader"
+                     rowClasses="productTableOddRow,productTableEvenRow">
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                #{product.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Descrizione</f:facet>
+                #{product.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Prezzo</f:facet>
+                #{product.price}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Codice</f:facet>
+                #{product.code}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Quantità in magazzino</f:facet>
+                #{product.stockQuantity}
+            </h:column>
+        </h:dataTable>
+
+        <h:link value="Aggiungi un prodotto" outcome="addProduct" />
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+
+
+</html>
