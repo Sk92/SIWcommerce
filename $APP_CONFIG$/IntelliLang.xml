@@ -5,5 +5,9 @@
     <option name="PATTERN_ANNOTATION" value="org.intellij.lang.annotations.Pattern" />
     <option name="SUBST_ANNOTATION" value="org.intellij.lang.annotations.Subst" />
     <option name="RESOLVE_REFERENCES" value="true" />
+    <injection language="XHTML" injector-id="xml">
+      <display-name>define</display-name>
+      <place><![CDATA[xmlTag().withLocalName(string().equalTo("define")).withNamespace(string().equalTo("http://xmlns.jcp.org/jsf/facelets"))]]></place>
+    </injection>
   </component>
 </application>
