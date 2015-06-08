@@ -8,34 +8,18 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
+        <div class="container-fluid">
 
-        <h:dataTable value="#{productController.productList}" var="product"
-                     styleClass="productTable"
-                     headerClass="productTableHeader"
-                     rowClasses="productTableOddRow,productTableEvenRow">
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                #{product.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Descrizione</f:facet>
-                #{product.description}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Prezzo</f:facet>
-                #{product.price}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Codice</f:facet>
-                #{product.code}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Quantità in magazzino</f:facet>
-                #{product.stockQuantity}
-            </h:column>
-        </h:dataTable>
+            <ui:repeat value="#{productController.productList}" var="product">
+                <div class="sm-box">
+                    <div>#{product.name}</div>
+                    <div>#{product.description}</div>
+                    <div>#{product.price}</div>
+                    <button type="button" class="btn btn-default">Add to cart</button>
+                </div>
+            </ui:repeat>
 
-        <h:link value="Aggiungi un prodotto" outcome="addProduct" />
+        </div>
 
 
 

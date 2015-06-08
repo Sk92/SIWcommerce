@@ -1,7 +1,7 @@
 package controller;
 
 import model.Product;
-import model.ProductFacade;
+import facades.ProductFacade;
 
 import javax.faces.bean.ManagedBean;
 import javax.ejb.EJB;

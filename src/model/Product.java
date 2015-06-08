@@ -10,16 +10,31 @@ import java.math.BigInteger;
 @NamedQuery(name="Product.getAllProducts", query="SELECT p FROM Product p")
 @Table(name = "products", schema = "public", catalog = "smcommerce")
 public class Product {
-    private BigInteger id;
-    private String name;
-    private String code;
-    private String description;
-    private Double price;
-    private int stockQuantity;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    private BigInteger id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "stock_quantity")
+    private int stockQuantity;
+
+    @ManyToOne
+    private Provider provider;
+
+
     public BigInteger getId() {
         return id;
     }
@@ -28,8 +43,6 @@ public class Product {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -38,8 +51,6 @@ public class Product {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -48,8 +59,6 @@ public class Product {
         this.code = code;
     }
 
-    @Basic
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -58,8 +67,6 @@ public class Product {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
@@ -68,8 +75,6 @@ public class Product {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "stock_quantity")
     public int getStockQuantity() {
         return stockQuantity;
     }
@@ -78,15 +83,11 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        //TODO
-        return true;
+    public Provider getProvider() {
+        return provider;
     }
 
-    @Override
-    public int hashCode() {
-        //TODO
-        return 1;
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 }

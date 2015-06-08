@@ -1,5 +1,7 @@
-package model;
+package facades;
 
+
+import model.Product;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
