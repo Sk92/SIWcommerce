@@ -3,10 +3,9 @@ package model;
 import javax.persistence.*;
 import java.math.BigInteger;
 
-/**
- * Created by alessandro on 05/06/15.
- */
+
 @Entity
+// @NamedQuery(name="Provider.getAllProviders", query="SELECT p FROM Provider p")
 @Table(name = "providers", schema = "public", catalog = "smcommerce")
 public class Provider {
     private BigInteger id;
@@ -14,6 +13,27 @@ public class Provider {
     private BigInteger quantity;
     private Order ordersByOrderId;
     private Product productsByProductId;
+    private  String iva;
+    private  String phoneNumber;
+    private  String email;
+    private  String address;
+
+
+    public void setIva(String iva) {
+        this.iva = iva;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Id
     @Column(name = "id")
