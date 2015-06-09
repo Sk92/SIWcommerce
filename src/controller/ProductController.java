@@ -1,5 +1,7 @@
 package controller;
 
+import facades.OrderFacade;
+import model.Order;
 import model.Product;
 import facades.ProductFacade;
 
@@ -37,7 +39,7 @@ public class ProductController {
     public String showProduct() {
         Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String productId = params.get("id");
-        this.product = productFacade.getProductById(new BigInteger(productId));
+        this.product = productFacade.getProductById(Long.parseLong(productId));
         return "product?faces-redirect=true";
     }
 

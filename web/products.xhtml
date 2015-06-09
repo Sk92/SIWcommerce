@@ -20,7 +20,13 @@
                             <f:param name="id" value="#{product.id}" />
                         </h:commandLink>
                     </h:form>
-                    <button type="button" class="btn btn-default">Add to cart</button>
+                    <ui:fragment rendered="#{userController.isLoggedIn()}">
+                         <h:form>
+                             <h:commandLink action="#{userController.addProductToOrder}" value="Aggiungi all'ordine">
+                                 <f:param name="id" value="#{product.id}" />
+                             </h:commandLink>
+                        </h:form>
+                    </ui:fragment>
                 </div>
             </ui:repeat>
 

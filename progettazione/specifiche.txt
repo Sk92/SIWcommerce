@@ -17,9 +17,9 @@ Caso d'uso UC2:Effettua ordine.
   -Scenario principale di successo:
     1. Un cliente vuole effettuare un ordine.
     2. Il cliente inserisce la sua email e la sua password, il sistema verifica la correttezza dei dati immessi e autentica il cliente.
-    3. Il cliente sceglie l'attivit‡ ìcrea nuovo ordineî.
+    3. Il cliente sceglie l'attività crea nuovo ordine.
     4. Il sistema mostra il catalogo dei prodotti.
-    5. Il cliente sceglie un prodotto e aggiunge codice e quantit‡ del prodotto all'ordine.
+    5. Il cliente sceglie un prodotto e aggiunge codice e quantità del prodotto all'ordine.
     6. Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino.
     7. Il sistema registra la riga d'ordine.
     8. Il cliente ripete i passi 4-7 fino a che non indica di aver terminato.

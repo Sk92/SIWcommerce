@@ -3,7 +3,9 @@ package model;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -13,7 +15,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -24,14 +26,31 @@ public class Order {
     @Column(name = "processed_at")
     private Date processedAt;
 
-    @OneToMany
-    private Collection<OrderLine> orderLines;
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    private List<OrderLine> orderLines;
 
-    public BigInteger getId() {
+    @ManyToOne
+    private Customer customer;
+
+
+    public Order() {
+        this.orderLines = new ArrayList<OrderLine>();
+    }
+
+
+    public void addProduct(Product product) {
+        OrderLine orderLine = new OrderLine();
+        orderLine.setProduct(product);
+        orderLine.setOrder(this);
+        this.orderLines.add(orderLine);
+    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,11 +78,19 @@ public class Order {
         this.processedAt = processedAt;
     }
 
-    public Collection<OrderLine> getOrderLines() {
+    public List<OrderLine> getOrderLines() {
         return orderLines;
     }
 
-    public void setOrderLines(Collection<OrderLine> orderLines) {
+    public void setOrderLines(List<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

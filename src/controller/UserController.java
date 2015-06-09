@@ -1,12 +1,18 @@
 package controller;
 
+import facades.OrderFacade;
+import facades.ProductFacade;
 import facades.UserFacade;
+import model.Order;
+import model.Product;
 import model.User;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.math.BigInteger;
+import java.util.Map;
 
 @ManagedBean
 @SessionScoped
@@ -18,9 +24,16 @@ public class UserController {
     private String name;
     private String lastName;
     private User currentUser;
+    private Order currentOrder;
 
     @EJB
     private UserFacade userFacade;
+
+    @EJB
+    private OrderFacade orderFacade;
+
+    @EJB
+    private ProductFacade productFacade;
 
 
     public String login() {
@@ -45,6 +58,33 @@ public class UserController {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
+
+    public String addProductToOrder() {
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String productId = params.get("id");
+        Product product = productFacade.getProductById(Long.parseLong(productId));
+        product.setId(Long.parseLong(productId));
+        if (currentOrder == null)
+            currentOrder = orderFacade.createOrder();
+
+        //TODO: add customer to currentOrder
+        currentOrder.addProduct(product);
+        return "products?faces-redirect=true";
+    }
+
+    public String nullifyOrder() {
+        this.currentOrder = null;
+        return "products?faces-redirect=true";
+    }
+
+
+    public String confirmOrder() {
+        orderFacade.saveOrder(this.currentOrder);
+        this.currentOrder = null;
+        return "myOrders?faces-redirect=true";
+    }
+
+
 
     public boolean isLoggedIn() {
         return (currentUser != null);
@@ -88,5 +128,13 @@ public class UserController {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
     }
 }

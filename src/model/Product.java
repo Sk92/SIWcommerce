@@ -17,7 +17,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -38,11 +38,15 @@ public class Product {
     private Provider provider;
 
 
-    public BigInteger getId() {
+    public Product() {
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,7 +11,7 @@ public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "sell_price")
     private Double sellPrice;
@@ -19,18 +19,19 @@ public class OrderLine {
     @Column(name = "quantity")
     private BigInteger quantity;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="order_id")
     private Order order;
 
     @OneToOne
     private Product product;
 
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

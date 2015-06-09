@@ -21,6 +21,9 @@
                 <ul class="nav navbar-nav">
                     <li><h:link value="Home" outcome="index" /></li>
                     <li><h:link value="Prodotti" outcome="products" /></li>
+                    <ui:fragment rendered="#{userController.isLoggedIn()}">
+                        <li><h:link value="Ordine" outcome="currentOrder" /></li>
+                    </ui:fragment>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <ui:fragment rendered="#{userController.isLoggedIn()}">

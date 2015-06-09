@@ -3,6 +3,7 @@ package facades;
 
 import model.Product;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,12 +11,16 @@ import javax.swing.*;
 import java.math.BigInteger;
 import java.util.List;
 
-@Stateless(name="pFacade")
+@Stateless(name="productFacade")
 public class ProductFacade {
 
 
     @PersistenceContext(unitName = "smcommerce-unit")
     private EntityManager em;
+
+    public ProductFacade() {
+
+    }
 
     public Product createProduct(String name, String code, String description, Double price, int stockQuantity) {
         Product product = new Product();
@@ -33,8 +38,12 @@ public class ProductFacade {
         return em.createNamedQuery("Product.getAllProducts", Product.class).getResultList();
     }
 
-    public Product getProductById(BigInteger id) {
-        List<Product> productList = em.createNamedQuery("Product.findProductById", Product.class).setParameter("id", id).getResultList();
-        return productList.get(0);
+    public Product getProductById(Long id) {
+        //List<Product> productList = em.createNamedQuery("Product.findProductById", Product.class).setParameter("id", id).getResultList();
+        //return productList.get(0);
+        return em.find(Product.class, id);
     }
+
+
+
 }
