@@ -6,6 +6,8 @@ import model.Product;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.*;
+import java.math.BigInteger;
 import java.util.List;
 
 @Stateless(name="pFacade")
@@ -29,5 +31,10 @@ public class ProductFacade {
 
     public List<Product> getProductList() {
         return em.createNamedQuery("Product.getAllProducts", Product.class).getResultList();
+    }
+
+    public Product getProductById(BigInteger id) {
+        List<Product> productList = em.createNamedQuery("Product.findProductById", Product.class).setParameter("id", id).getResultList();
+        return productList.get(0);
     }
 }

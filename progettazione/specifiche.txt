@@ -2,7 +2,7 @@ Caso D'uso UC1:Consulta listino.
   -Attore primario:Utente non registrato
   -Scenario principale di successo:
     1. L'utente vuole consultare il catalogo dei prodotti.
-    2. L'utente seleziona la voce ìcatalogo prodottiî.
+    2. L'utente seleziona la voce catalogo prodotti.
     3. Il sistema mostra il catalogo dei prodotti.
     4. L'utente consulta il catalogo dei prodotti.
     5. L'utente seleziona un prodotto e ne richiede i dettagli.

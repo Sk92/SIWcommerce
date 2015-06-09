@@ -3,11 +3,19 @@ package controller;
 import model.Product;
 import facades.ProductFacade;
 
+
 import javax.faces.bean.ManagedBean;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean
+@SessionScoped
 public class ProductController {
 
     @EJB
@@ -19,11 +27,20 @@ public class ProductController {
     private int stockQuantity;
     private Product product;
     private List<Product> productList;
+    private Long productId;
 
     public String createProduct() {
         this.product = productFacade.createProduct(name, code, description, price, stockQuantity);
         return "products";
     }
+
+    public String showProduct() {
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String productId = params.get("id");
+        this.product = productFacade.getProductById(new BigInteger(productId));
+        return "product?faces-redirect=true";
+    }
+
 
     public ProductFacade getProductFacade() {
         return productFacade;
@@ -87,5 +104,13 @@ public class ProductController {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

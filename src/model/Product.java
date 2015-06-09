@@ -7,7 +7,10 @@ import java.math.BigInteger;
  * Created by alessandro on 05/06/15.
  */
 @Entity
-@NamedQuery(name="Product.getAllProducts", query="SELECT p FROM Product p")
+@NamedQueries({
+        @NamedQuery(name = "Product.getAllProducts", query = "SELECT p FROM Product p"),
+        @NamedQuery(name = "Product.findProductById", query = "SELECT p FROM Product p WHERE p.id = :id")
+})
 @Table(name = "products", schema = "public", catalog = "smcommerce")
 public class Product {
 
