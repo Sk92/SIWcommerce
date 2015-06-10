@@ -1,4 +1,6 @@
-package model;
+package facades;
+
+import model.Provider;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,9 +18,9 @@ public class ProviderFacade {
     @PersistenceContext(unitName = "smcommerce-unit")
     private EntityManager em;
 
-    public Provider createProvaider(String iva, String phoneNumber,String email,String address){
+    public Provider createProvider(String vat, String phoneNumber,String email,String address){
         Provider provider = new Provider();
-        provider.setIva(iva);
+        provider.setVat(vat);
         provider.setPhoneNumber(phoneNumber);
         provider.setEmail(email);
         provider.setAddress(address);

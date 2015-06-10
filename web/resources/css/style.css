@@ -1,0 +1,11 @@
+
+
+.sm-box {
+    float: left;
+    width: 22em;
+    height: 14em;
+    background-color: #F4F4F4;
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin: 1em;
+}

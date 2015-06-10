@@ -9,14 +9,26 @@ import java.util.Collection;
 @Entity
 @Table(name = "customers", schema = "public", catalog = "smcommerce")
 public class Customer {
-    private BigInteger id;
-    private String address;
-    private Date dateOfBirth;
-    private User usersByUserId;
-    private Collection<Order> ordersesById;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    private BigInteger id;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+
+    @OneToOne
+    private User user;
+
+    @OneToMany
+    private Collection<Order> orders;
+
+
     public BigInteger getId() {
         return id;
     }
@@ -25,8 +37,6 @@ public class Customer {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -35,8 +45,6 @@ public class Customer {
         this.address = address;
     }
 
-    @Basic
-    @Column(name = "date_of_birth")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -45,44 +53,19 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Customer customer = (Customer) o;
-
-        if (address != null ? !address.equals(customer.address) : customer.address != null) return false;
-        if (dateOfBirth != null ? !dateOfBirth.equals(customer.dateOfBirth) : customer.dateOfBirth != null) return false;
-        if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
-
-        return true;
+    public User getUser() {
+        return user;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
-        return result;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUsersByUserId() {
-        return usersByUserId;
+    public Collection<Order> getOrders() {
+        return orders;
     }
 
-    public void setUsersByUserId(User usersByUserId) {
-        this.usersByUserId = usersByUserId;
-    }
-
-    @OneToMany(mappedBy = "getCustomersByCustomerId")
-    public Collection<Order> getOrdersesById() {
-        return ordersesById;
-    }
-
-    public void setOrdersesById(Collection<Order> ordersesById) {
-        this.ordersesById = ordersesById;
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
     }
 }

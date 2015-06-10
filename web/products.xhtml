@@ -8,34 +8,29 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
+        <div class="container-fluid">
 
-        <h:dataTable value="#{productController.productList}" var="product"
-                     styleClass="productTable"
-                     headerClass="productTableHeader"
-                     rowClasses="productTableOddRow,productTableEvenRow">
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                #{product.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Descrizione</f:facet>
-                #{product.description}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Prezzo</f:facet>
-                #{product.price}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Codice</f:facet>
-                #{product.code}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Quantità in magazzino</f:facet>
-                #{product.stockQuantity}
-            </h:column>
-        </h:dataTable>
+            <ui:repeat value="#{productController.productList}" var="product">
+                <div class="sm-box">
+                    <div>#{product.name}</div>
+                    <div>#{product.description}</div>
+                    <div>#{product.price}</div>
+                    <h:form>
+                        <h:commandLink action="#{productController.showProduct}" value="Dettagli">
+                            <f:param name="id" value="#{product.id}" />
+                        </h:commandLink>
+                    </h:form>
+                    <ui:fragment rendered="#{userController.isLoggedIn()}">
+                         <h:form>
+                             <h:commandLink action="#{userController.addProductToOrder}" value="Aggiungi all'ordine">
+                                 <f:param name="id" value="#{product.id}" />
+                             </h:commandLink>
+                        </h:form>
+                    </ui:fragment>
+                </div>
+            </ui:repeat>
 
-        <h:link value="Aggiungi un prodotto" outcome="addProduct" />
+        </div>
 
 
 

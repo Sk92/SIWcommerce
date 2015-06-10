@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" >
 
 <ui:composition>
 
@@ -21,12 +21,25 @@
                 <ul class="nav navbar-nav">
                     <li><h:link value="Home" outcome="index" /></li>
                     <li><h:link value="Prodotti" outcome="products" /></li>
+                    <ui:fragment rendered="#{userController.isLoggedIn()}">
+                        <li><h:link value="Ordine" outcome="currentOrder" /></li>
+                    </ui:fragment>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <ui:fragment rendered="#{userController.isLoggedIn()}">
+                        <li>#{userController.currentUser.name}</li>
+                        <li><h:form><h:commandLink value="Logout" action="#{userController.logout}"/></h:form></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{!userController.isLoggedIn()}">
+                        <li><h:link value="Login" outcome="login" /></li>
+                        <li><h:link value="Register" outcome="register" /></li>
+                    </ui:fragment>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search" />
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

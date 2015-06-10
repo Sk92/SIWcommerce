@@ -1,2 +1,6 @@
 .idea
 lib
+$APP_CONFIG$
+$ROOT_CONFIG$
+_windows
+*.iml

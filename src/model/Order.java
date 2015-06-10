@@ -3,32 +3,57 @@ package model;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @Table(name = "orders", schema = "public", catalog = "smcommerce")
 public class Order {
-    private BigInteger id;
-    private Date createdAt;
-    private Date closedAt;
-    private Date processedAt;
-    private Collection<OrderLine> orderRowsesById;
-    private Customer customersByCustomerId;
-    private Collection<Provider> providersesById;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    public BigInteger getId() {
+    private Long id;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "closed_at")
+    private Date closedAt;
+
+    @Column(name = "processed_at")
+    private Date processedAt;
+
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    private List<OrderLine> orderLines;
+
+    @ManyToOne
+    private Customer customer;
+
+
+    public Order() {
+        this.orderLines = new ArrayList<OrderLine>();
+    }
+
+
+    public void addProduct(Product product) {
+        OrderLine orderLine = new OrderLine();
+        orderLine.setProduct(product);
+        orderLine.setOrder(this);
+        this.orderLines.add(orderLine);
+    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "created_at")
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -37,8 +62,6 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-    @Basic
-    @Column(name = "closed_at")
     public Date getClosedAt() {
         return closedAt;
     }
@@ -47,8 +70,6 @@ public class Order {
         this.closedAt = closedAt;
     }
 
-    @Basic
-    @Column(name = "processed_at")
     public Date getProcessedAt() {
         return processedAt;
     }
@@ -57,55 +78,19 @@ public class Order {
         this.processedAt = processedAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Order order = (Order) o;
-
-        if (closedAt != null ? !closedAt.equals(order.closedAt) : order.closedAt != null) return false;
-        if (createdAt != null ? !createdAt.equals(order.createdAt) : order.createdAt != null) return false;
-        if (id != null ? !id.equals(order.id) : order.id != null) return false;
-        if (processedAt != null ? !processedAt.equals(order.processedAt) : order.processedAt != null) return false;
-
-        return true;
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        result = 31 * result + (closedAt != null ? closedAt.hashCode() : 0);
-        result = 31 * result + (processedAt != null ? processedAt.hashCode() : 0);
-        return result;
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 
-    @OneToMany(mappedBy = "ordersByOrderId")
-    public Collection<OrderLine> getOrderRowsesById() {
-        return orderRowsesById;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOrderRowsesById(Collection<OrderLine> orderRowsesById) {
-        this.orderRowsesById = orderRowsesById;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    public Customer getCustomersByCustomerId() {
-        return customersByCustomerId;
-    }
-
-    public void setCustomersByCustomerId(Customer clientsByCustomerId) {
-        this.customersByCustomerId = clientsByCustomerId;
-    }
-
-    @OneToMany(mappedBy = "ordersByOrderId")
-    public Collection<Provider> getProvidersesById() {
-        return providersesById;
-    }
-
-    public void setProvidersesById(Collection<Provider> providersesById) {
-        this.providersesById = providersesById;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
