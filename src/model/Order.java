@@ -38,10 +38,12 @@ public class Order {
     }
 
 
-    public void addProduct(Product product) {
+    public void addProduct(Product product, int quantity) {
         OrderLine orderLine = new OrderLine();
         orderLine.setProduct(product);
         orderLine.setOrder(this);
+        orderLine.setQuantity(quantity);
+        System.out.println(quantity);
         this.orderLines.add(orderLine);
     }
 

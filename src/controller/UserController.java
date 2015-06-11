@@ -26,6 +26,8 @@ public class UserController {
     private User currentUser;
     private Order currentOrder;
 
+    private String productQuantity;
+
     @EJB
     private UserFacade userFacade;
 
@@ -59,16 +61,16 @@ public class UserController {
         return "index?faces-redirect=true";
     }
 
+
     public String addProductToOrder() {
         Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String productId = params.get("id");
         Product product = productFacade.getProductById(Long.parseLong(productId));
-        product.setId(Long.parseLong(productId));
         if (currentOrder == null)
             currentOrder = orderFacade.createOrder();
 
         //TODO: add customer to currentOrder
-        currentOrder.addProduct(product);
+        currentOrder.addProduct(product, 1);
         return "products?faces-redirect=true";
     }
 
@@ -88,6 +90,10 @@ public class UserController {
 
     public boolean isLoggedIn() {
         return (currentUser != null);
+    }
+
+    public boolean isAdmin() {
+        return (this.isLoggedIn() && currentUser.getRole().equals("admin"));
     }
 
     public String getEmail() {
@@ -136,5 +142,14 @@ public class UserController {
 
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
+    }
+
+
+    public String getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

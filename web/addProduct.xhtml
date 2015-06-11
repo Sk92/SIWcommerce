@@ -7,39 +7,29 @@
     <ui:define name="content">
 
 
-        <h3>Add Product</h3>
-        <hr/>
-        <h:form>
-        <table>
-            <tr>
-                <td>Nome :</td>
-                <td><h:inputText size="10" id="name" value="#{productController.name}" /></td>
-            </tr>
-            <tr>
-                <td>Descrizione :</td>
-                <td><h:inputText size="20" id="description" value="#{productController.description}" /></td>
-            </tr>
-            <tr>
-                <td>Quantità :</td>
-                <td><h:inputText size="5" id="stockQuantity" value="#{productController.stockQuantity}" /></td>
-            </tr>
-            <tr>
-                <td>Codice :</td>
-                <td><h:inputText size="5" id="code" value="#{productController.code}" /></td>
-            </tr>
-            <tr>
-                <td>Prezzo :</td>
-                <td><h:inputText size="5" id="price" value="#{productController.price}" /></td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td>
-                    <h:commandButton value="Add Product" action="#{productController.createProduct}">
-                    </h:commandButton>
-                </td>
-            </tr>
-        </table>
+        <h3>Aggiungi un prodotto</h3>
+
+        <h:form enctype="multipart/form-data">
+            <label>Name:
+                <h:inputText value="#{productController.name}" id="name"/></label><h:message for="name"/>
+            <br/><br/>
+            <label>Price:
+                <h:inputText value="#{productController.price}" id="price"></h:inputText>
+                <h:message for="price"/>
+            </label>
+            <br/><br/>
+            <label>Code:
+                <h:inputText value="#{productController.code}" id="productCode">
+                </h:inputText></label>
+            <h:message for="productCode" styleClass="error"/><br/><br/>
+            <label>Description:
+                <h:inputTextarea rows="6" cols="30" value="#{productController.description}" required="false"/>
+            </label><br/><br/>
+
+            <h:inputFile value="#{productController.image}" />
+            <h:commandButton value="Submit" action="#{productController.createProduct}" styleClass="btn btn-default"/>
         </h:form>
+
 
     </ui:define>
 </ui:composition>
