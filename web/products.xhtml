@@ -12,6 +12,7 @@
 
             <ui:repeat value="#{productController.productList}" var="product">
                 <div class="sm-box">
+                    <h:graphicImage library="images" name="#{product.id}.jpg" width="200" height="200" />
                     <div>#{product.name}</div>
                     <div>#{product.description}</div>
                     <div>#{product.price}</div>
@@ -29,6 +30,10 @@
                     </ui:fragment>
                 </div>
             </ui:repeat>
+
+            <ui:fragment rendered="#{userController.isAdmin()}">
+                <h:link value="Aggiungi un prodotto" outcome="addProduct" />
+            </ui:fragment>
 
         </div>
 

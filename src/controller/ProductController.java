@@ -1,18 +1,17 @@
 package controller;
 
-import facades.OrderFacade;
-import model.Order;
-import model.Product;
 import facades.ProductFacade;
+import model.Product;
 
-
-import javax.faces.bean.ManagedBean;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.math.BigInteger;
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +30,29 @@ public class ProductController {
     private List<Product> productList;
     private Long productId;
 
-    public String createProduct() {
+    private Part image;
+
+
+    public String createProduct() throws IOException {
         this.product = productFacade.createProduct(name, code, description, price, stockQuantity);
+        this.saveImage(this.product.getId());
         return "products";
+    }
+
+    public void saveImage(Long id) throws IOException {
+        String absoluteWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        absoluteWebPath = absoluteWebPath.substring(0, absoluteWebPath.indexOf("SIWcommerce")+11);
+        image.write(absoluteWebPath+"/web/resources/images/"+id+".jpg");
+    }
+
+    private static String getFilename(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+            }
+        }
+        return null;
     }
 
     public String showProduct() {
@@ -42,6 +61,10 @@ public class ProductController {
         this.product = productFacade.getProductById(Long.parseLong(productId));
         return "product?faces-redirect=true";
     }
+
+
+
+
 
 
     public ProductFacade getProductFacade() {
@@ -114,5 +137,13 @@ public class ProductController {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Part getImage() {
+        return image;
+    }
+
+    public void setImage(Part image) {
+        this.image = image;
     }
 }

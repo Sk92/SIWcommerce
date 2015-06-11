@@ -17,7 +17,7 @@ public class OrderLine {
     private Double sellPrice;
 
     @Column(name = "quantity")
-    private BigInteger quantity;
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name="order_id")
@@ -43,11 +43,11 @@ public class OrderLine {
         this.sellPrice = sellPrice;
     }
 
-    public BigInteger getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigInteger quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
