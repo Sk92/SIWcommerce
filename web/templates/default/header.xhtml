@@ -19,20 +19,20 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><h:link value="Home" outcome="index" /></li>
-                    <li><h:link value="Prodotti" outcome="products" /></li>
+                    <li><h:link value="Home" outcome="index"  styleClass="glyphicon glyphicon-home"/></li>
+                    <li><h:link value="Prodotti" outcome="products" styleClass="glyphicon glyphicon-list" /></li>
                     <ui:fragment rendered="#{userController.isLoggedIn()}">
-                        <li><h:link value="Ordine" outcome="currentOrder" /></li>
+                        <li><h:link value="Ordine" outcome="currentOrder" styleClass="glyphicon glyphicon-shopping-cart"/></li>
                     </ui:fragment>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <ui:fragment rendered="#{userController.isLoggedIn()}">
-                        <li>#{userController.currentUser.name}</li>
-                        <li><h:form><h:commandLink value="Logout" action="#{userController.logout}"/></h:form></li>
+                        <li><h:link value="#{userController.currentUser.name}" outcome="currentOrder" styleClass="glyphicon glyphicon"/></li>
+                        <li><h:form><h:commandLink value="Logout" styleClass="glyphicon glyphicon-log-out" action="#{userController.logout}"/></h:form></li>
                     </ui:fragment>
                     <ui:fragment rendered="#{!userController.isLoggedIn()}">
-                        <li><h:link value="Login" outcome="login" /></li>
-                        <li><h:link value="Register" outcome="register" /></li>
+                        <li><h:link value="Login" outcome="login" class="glyphicon glyphicon-log-in"/></li>
+                        <li><h:link value="Register" outcome="register" class="glyphicon glyphicon"/></li>
                     </ui:fragment>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
