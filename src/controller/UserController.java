@@ -32,7 +32,6 @@ public class UserController {
     private String address;
 
     private User currentUser;
-    private Order currentOrder;
 
     private String productQuantity;
 
@@ -77,33 +76,6 @@ public class UserController {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
-
-
-    public String addProductToOrder() {
-        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String productId = params.get("id");
-        Product product = productFacade.getProductById(Long.parseLong(productId));
-        if (currentOrder == null)
-            currentOrder = orderFacade.createOrder();
-
-        if (currentUser.getCustomer() != null)
-            currentOrder.setCustomer(currentUser.getCustomer());
-        currentOrder.addProduct(product, 1);
-        return "products?faces-redirect=true";
-    }
-
-    public String nullifyOrder() {
-        this.currentOrder = null;
-        return "products?faces-redirect=true";
-    }
-
-
-    public String confirmOrder() {
-        orderFacade.saveOrder(this.currentOrder);
-        this.currentOrder = null;
-        return "myOrders?faces-redirect=true";
-    }
-
 
 
     public boolean isLoggedIn() {
@@ -154,14 +126,6 @@ public class UserController {
         this.currentUser = currentUser;
     }
 
-    public Order getCurrentOrder() {
-        return currentOrder;
-    }
-
-    public void setCurrentOrder(Order currentOrder) {
-        this.currentOrder = currentOrder;
-    }
-
 
     public String getProductQuantity() {
         return productQuantity;
@@ -186,4 +150,5 @@ public class UserController {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

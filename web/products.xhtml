@@ -25,10 +25,12 @@
                         </h:form>
                         <div>#{product.description}</div>
                         <div>#{product.price} €</div>
-                        <ui:fragment rendered="#{userController.isLoggedIn()}">
+                        <ui:fragment rendered="#{userController.isLoggedIn() and !userController.isAdmin()}">
                              <h:form>
-                                 <h:inputText value="" styleClass="form-control"/>
-                                 <h:commandLink action="#{userController.addProductToOrder}" value="Aggiungi all'ordine">
+                                 <h:inputText value="#{currentOrderController.orderQuantity}" styleClass="form-control">
+                                    <f:ajax event="blur" listener="#{currentOrderController.setOrderQuantity}"/>
+                                 </h:inputText>
+                                 <h:commandLink action="#{currentOrderController.addProductToOrder}" value="Aggiungi all'ordine">
                                      <f:param name="id" value="#{product.id}" />
                                  </h:commandLink>
                             </h:form>

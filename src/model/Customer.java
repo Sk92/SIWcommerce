@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -14,7 +15,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "address")
     private String address;
@@ -26,15 +27,16 @@ public class Customer {
     @OneToOne
     private User user;
 
-    @OneToMany
-    private Collection<Order> orders;
+    @OneToMany(mappedBy="customer", fetch = FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+    @OrderBy("closedAt desc")
+    private List<Order> orders;
 
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,11 +64,11 @@ public class Customer {
         this.user = user;
     }
 
-    public Collection<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Collection<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

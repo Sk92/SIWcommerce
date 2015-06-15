@@ -11,7 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "orders", schema = "public", catalog = "smcommerce")
 @NamedQueries({
-        @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order o WHERE o.id = :id")
+        @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order o WHERE o.id = :id"),
+        @NamedQuery(name = "Order.getUnprocessedOrders", query = "SELECT o FROM Order o WHERE o.processedAt IS NULL")
 })
 public class Order {
 
@@ -29,7 +30,7 @@ public class Order {
     @Column(name = "processed_at")
     private Date processedAt;
 
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
     @ManyToOne
@@ -46,7 +47,7 @@ public class Order {
         orderLine.setProduct(product);
         orderLine.setOrder(this);
         orderLine.setQuantity(quantity);
-        System.out.println(quantity);
+        orderLine.setSellPrice(product.getPrice());
         this.orderLines.add(orderLine);
     }
 

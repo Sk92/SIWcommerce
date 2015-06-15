@@ -40,4 +40,24 @@ public class OrderFacade {
         List<Order> orderList = em.createNamedQuery("Order.findById", Order.class).setParameter("id", id).getResultList();
         return orderList.get(0).getCustomer();
     }
+
+    public List<Order> getUnprocessedOrders() {
+        return em.createNamedQuery("Order.getUnprocessedOrders", Order.class).getResultList();
+    }
+
+    public void processOrder(Long orderId) {
+        Order order = em.find(Order.class, orderId);
+        boolean canProcess = true;
+        for(OrderLine orderLine : order.getOrderLines()) {
+            if (orderLine.getProduct().getStockQuantity() < orderLine.getQuantity()) {
+                canProcess = false;
+            }
+        }
+        if (canProcess) {
+            for(OrderLine orderLine : order.getOrderLines()) {
+                orderLine.getProduct().setStockQuantity(orderLine.getProduct().getStockQuantity() - orderLine.getQuantity());
+            }
+            order.setProcessedAt(new Date(System.currentTimeMillis()));
+        }
+    }
 }

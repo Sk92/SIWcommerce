@@ -34,25 +34,23 @@ Caso d'uso UC3:Consulta i propri ordini.
   -Scenario principale di successo:
     1. Un cliente vuole consultare i propri ordini.
     2. Il cliente inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica il cliente.
-    3. Il cliente sceglie l'attivita' i miei ordini.
-    4. Il sistema mostra l'elenco degli ordini del cliente.
-    5. Il cliente seleziona l'ordine di cui vuole i dettagli.
-    6. Il sistema mostra i dettagli relativi all'ordine selezionato, compresi i prodotti scelti, il prezzo complessivo, la data di creazione, data chiusura e evasione ordine.
-    7. Il cliente ripete i passi 4-6 finche' necessario.
+    3. Il cliente sceglie la voce i miei ordini.
+    4. Il sistema mostra l'elenco degli ordini del cliente con i relativi dettagli.
 
 
 
 Caso d'uso UC4:Inserimento prodotti nel catalogo.
   -Attore primario:Amministratore.
   -Scenario principale di successo:
-    1. Un amministratore vuole inserire dei nuovi prodotti nel catalogo.   //(un? c'Ë pi˘ di un amministratore?)
-    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore. //(il login dell'amministratore Ë diverso?)
-    3. L'amministratore seleziona l'opzione "inserisci nuovo prodotto" //(L'interfaccia dell'amministratore deve essere diversa da quelle di un utente)
-    4. L'amministratore inserisce i dati relativi al prodotto da inserire: prezzo,quantita(?), fornitore(ecc). //
-    5. Il sistema registra il prodotto e i relativi dati.
-    6. I passi 4-5 vengono ripetuti finchË l'amministratore non indica di aver terminato.
+    1. Un amministratore vuole inserire dei nuovi prodotti nel catalogo.
+    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore.
+    3. L'amministratore seleziona la voce prodotti.
+    4. L'amministratore seleziona l'opzione "aggiungi un prodotto".
+    5. L'amministratore inserisce i dati relativi al prodotto da inserire.
+    6. Il sistema registra il prodotto e i relativi dati.
+    7. I passi 4-5 vengono ripetuti un numero indefinito di volte.
        Estensioni:
-       1-6a L'amministratore annulla l'inserimento del nuovo prodotto. il sistema non registra nessuna informazione // forse 1-4?
+       1-7a L'amministratore annulla l'inserimento del nuovo prodotto. Il sistema non registra nessuna informazione.
 
 
 
@@ -60,27 +58,31 @@ Caso D'uso UC5:Recupera indirizzo cliente.
   -Attore primario:Amministratore.
   -Scenario principale di successo:
     1. Un amministratore vuole recuperare l'indirizzo relativo a un cliente.
-    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore. //(il login dell'amministratore Ë diverso?)
-    3. L'amministratore seleziona l'opzione "recupera indirizzo cliente".
+    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore.
+    3. L'amministratore seleziona la voce "cerca cliente".
     4. L'amministratore inserisce il codice dell'ordine relativo al cliente da trovare.
-    5. Il sistema mostra l'indirizzo del cliente relativo all codice ordine.
+    5. Il sistema mostra l'indirizzo del cliente relativo all'ordine.
 
 
 
 Caso D'uso UC6:Evasione ordine.  
   -Attore primario:Amministratore.
   -Scenario principale di successo:
-    1. Un amministratore vuole evadere un ordine. // evadere un ordine mi suona malissimo ma vabbË.
-    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore. //(il login dell'amministratore Ë diverso?)
-    3. L'amministratore seleziona l'opzione "visualizza ordini non evasi".
+    1. Un amministratore vuole evadere un ordine.
+    2. L'amministratore inserisce la sua email e la sua password,il sistema verifica la correttezza dei dati immessi e autentica l'amministratore.
+    3. L'amministratore seleziona la voce "Ordini chiusi".
     4. Il sistema mostra gli ordini chiusi ma non ancora evasi.
-    5. L'amministratore seleziona un'ordine.
-    6. l sistema evade l'ordine: aggiorna l'ordine inserendo la data di spedizione e aggiorna la quantit‡ dei prodotti in magazzino (sottraendo la quantit‡ di prodotti usati per l'ordine)
+    5. L'amministratore seleziona l'ordine da evadere.
+    6. Il sistema evade l'ordine: aggiorna l'ordine inserendo la data di spedizione e aggiorna la quantità dei prodotti in magazzino.
        Estensioni:
-      alcuni prodotti potrebbero non essere presenti in magazzino nella quantit‡ specificata dall'ordine. In questo caso l'ordine rimane in sospeso // forse non v‡ messa come estensione.
+         alcuni prodotti potrebbero non essere presenti in magazzino nella quantità specificata dall'ordine. In questo caso l'ordine rimane in sospeso.
 
 
-
-
-
-//il login lo mette come pre condizione quindi forse non va messo del caso d'uso.
+Caso D'uso UC7:Registrazione cliente.
+    -Attore primario:Utente non registrato
+    -Scenario principale di successo:
+          1. L'utente vuole registrarsi al sistema.
+          2. L'utente seleziona la voce "Sign up".
+          3. L'utente inserisce i dati richiesti alla registrazione.
+          4. Il sistema (verifica i dati immessi) e registra le informazioni relative al cliente.
+          5. Da ora in poi il cliente potrà autenticarsi attraverso le sue credenziali.
