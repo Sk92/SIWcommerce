@@ -4,15 +4,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
+<h:head>
+    <style>
+        .Bimage{
+            background-image:url(resources/images/asd.jpg);
+        }
+    </style>
+</h:head>
+<h:body styleClass="Bimage">
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
         <div class="row">
            <div class="col-xs-8">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">Sign up</div>
-                    <div class="panel-body">
+                    <div class="panel-body ">
                         <h:form role="form">
 
                             <div class="form-group">
@@ -57,5 +64,5 @@
 
     </ui:define>
 </ui:composition>
-
+</h:body>
 </html>

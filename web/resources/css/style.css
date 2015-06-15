@@ -2,15 +2,10 @@
 
 .sm-box {
     float: left;
-    width: 16em;
-    height: auto;
+    width: 22em;
+    height: 22em;
     background-color: #F4F4F4;
-    box-shadow: 0px 0px 7px 0px rgba(50, 50, 50, 0.63);
+    border: 1px solid #ccc;
     padding: 1em;
     margin: 1em;
-}
-
-
-.sm-box img {
-    border: 1px solid black;
 }
