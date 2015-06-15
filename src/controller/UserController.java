@@ -12,6 +12,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.math.BigInteger;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Map;
 
 @ManagedBean
@@ -23,6 +28,9 @@ public class UserController {
     private String password;
     private String name;
     private String lastName;
+    private String dateOfBirth;
+    private String address;
+
     private User currentUser;
     private Order currentOrder;
 
@@ -50,7 +58,16 @@ public class UserController {
     }
 
     public String register() {
-        User user = userFacade.createUser(email, password, name, lastName);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        java.util.Date parsed = null;
+        try {
+            parsed = format.parse(this.dateOfBirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date dateOfBirth = new java.sql.Date(parsed.getTime());
+
+        User user = userFacade.createUser(email, password, name, lastName, dateOfBirth, address);
         if (user != null)
             return "index?faces-redirect=true";
         return "register?faces-redirect=true";
@@ -69,7 +86,8 @@ public class UserController {
         if (currentOrder == null)
             currentOrder = orderFacade.createOrder();
 
-        //TODO: add customer to currentOrder
+        if (currentUser.getCustomer() != null)
+            currentOrder.setCustomer(currentUser.getCustomer());
         currentOrder.addProduct(product, 1);
         return "products?faces-redirect=true";
     }
@@ -151,5 +169,21 @@ public class UserController {
 
     public void setProductQuantity(String productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

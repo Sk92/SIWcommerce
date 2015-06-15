@@ -7,28 +7,48 @@
     <ui:define name="content">
 
 
-        <h3>Aggiungi un prodotto</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">Aggiungi un prodotto</div>
+            <div class="panel-body">
 
-        <h:form enctype="multipart/form-data">
-            <label>Name:
-                <h:inputText value="#{productController.name}" id="name"/></label><h:message for="name"/>
-            <br/><br/>
-            <label>Price:
-                <h:inputText value="#{productController.price}" id="price"></h:inputText>
-                <h:message for="price"/>
-            </label>
-            <br/><br/>
-            <label>Code:
-                <h:inputText value="#{productController.code}" id="productCode">
-                </h:inputText></label>
-            <h:message for="productCode" styleClass="error"/><br/><br/>
-            <label>Description:
-                <h:inputTextarea rows="6" cols="30" value="#{productController.description}" required="false"/>
-            </label><br/><br/>
+                <h:form enctype="multipart/form-data" role="form">
+                    <div class="form-group">
+                        <h:inputFile value="#{productController.image}" styleClass="form-control"/>
+                    </div>
 
-            <h:inputFile value="#{productController.image}" />
-            <h:commandButton value="Submit" action="#{productController.createProduct}" styleClass="btn btn-default"/>
-        </h:form>
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <h:inputText value="#{productController.name}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Codice</label>
+                        <h:inputText value="#{productController.code}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prezzo</label>
+                        <h:inputText value="#{productController.price}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantità in magazzino</label>
+                        <h:inputText value="#{productController.stockQuantity}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrizione</label>
+                        <h:inputTextarea rows="6" cols="30" value="#{productController.description}" required="false" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:commandButton value="Inserisci" action="#{productController.createProduct}" styleClass="btn btn-primary"/>
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+
 
 
     </ui:define>

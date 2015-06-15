@@ -7,6 +7,7 @@ import java.util.Collection;
 
 
 @Entity
+@NamedQuery(name = "Customer.getAllCustomers", query = "SELECT c FROM Customer c")
 @Table(name = "customers", schema = "public", catalog = "smcommerce")
 public class Customer {
 

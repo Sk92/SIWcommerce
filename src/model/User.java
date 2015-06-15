@@ -34,6 +34,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @OneToOne(mappedBy = "user")
+    private Customer customer;
+
 
     public boolean checkPassword(String password) {
         return this.password.equals(password);
@@ -94,5 +97,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

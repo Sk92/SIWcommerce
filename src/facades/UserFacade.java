@@ -1,5 +1,6 @@
 package facades;
 
+import model.Customer;
 import model.User;
 
 import javax.ejb.Stateless;
@@ -16,7 +17,7 @@ public class UserFacade {
     private EntityManager em;
 
 
-    public User createUser(String email, String password, String name, String lastName) {
+    public User createUser(String email, String password, String name, String lastName, Date dateOfBirth, String address) {
         if (findByEmail(email) != null)
             return null;
 
@@ -28,6 +29,12 @@ public class UserFacade {
         user.setRole("user");
         user.setCreatedAt(new Date(System.currentTimeMillis()));
         em.persist(user);
+
+        Customer customer = new Customer();
+        customer.setAddress(address);
+        customer.setDateOfBirth(dateOfBirth);
+        customer.setUser(user);
+        em.persist(customer);
         return user;
     }
 
