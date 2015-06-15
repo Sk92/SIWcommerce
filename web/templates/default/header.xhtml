@@ -24,6 +24,9 @@
                     <ui:fragment rendered="#{userController.isLoggedIn()}">
                         <li><h:link value="Ordine" outcome="currentOrder" styleClass="glyphicon glyphicon-shopping-cart"/></li>
                     </ui:fragment>
+                    <ui:fragment rendered="#{userController.isAdmin()}">
+                        <li><h:link value="Cerca cliente" outcome="searchCustomer" styleClass="glyphicon glyphicon-search"/></li>
+                    </ui:fragment>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <ui:fragment rendered="#{userController.isLoggedIn()}">

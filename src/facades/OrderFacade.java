@@ -1,5 +1,6 @@
 package facades;
 
+import model.Customer;
 import model.Order;
 import model.OrderLine;
 
@@ -7,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Date;
+import java.util.List;
 
 @Stateless(name="orderFacade")
 public class OrderFacade {
@@ -31,5 +33,11 @@ public class OrderFacade {
 
     public void saveOrder(Order currentOrder) {
         em.persist(currentOrder);
+    }
+
+
+    public Customer findCustomerByOrderId(Long id) {
+        List<Order> orderList = em.createNamedQuery("Order.findById", Order.class).setParameter("id", id).getResultList();
+        return orderList.get(0).getCustomer();
     }
 }

@@ -10,6 +10,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders", schema = "public", catalog = "smcommerce")
+@NamedQueries({
+        @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order o WHERE o.id = :id")
+})
 public class Order {
 
     @Id

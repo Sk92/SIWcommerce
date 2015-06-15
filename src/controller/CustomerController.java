@@ -24,7 +24,9 @@ public class CustomerController {
         return customerFacade.getCustomerList();
     }
 
+
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
+
 }
