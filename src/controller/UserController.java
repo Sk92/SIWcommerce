@@ -6,11 +6,11 @@ import facades.UserFacade;
 import model.Order;
 import model.Product;
 import model.User;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -30,9 +30,7 @@ public class UserController {
     private String lastName;
     private String dateOfBirth;
     private String address;
-
     private User currentUser;
-
     private String productQuantity;
 
     @EJB
@@ -66,7 +64,7 @@ public class UserController {
         }
         java.sql.Date dateOfBirth = new java.sql.Date(parsed.getTime());
 
-        User user = userFacade.createUser(email, password, name, lastName, dateOfBirth, address);
+        User user = userFacade.createUser(email, password, name, lastName,dateOfBirth, address);
         if (user != null)
             return "index?faces-redirect=true";
         return "register?faces-redirect=true";
@@ -75,6 +73,23 @@ public class UserController {
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
+    }
+
+
+    public String addUser() throws IOException{
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date parsed = null;
+        try {
+
+            parsed = format.parse(this.dateOfBirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date dateOfBirth = new java.sql.Date(parsed.getTime());
+        User user = userFacade.createUser( email,  password,  name,  lastName, dateOfBirth, address);
+        if (user != null)
+            return "index?faces-redirect=true";
+        return "register?faces-redirect=true";
     }
 
 
@@ -151,4 +166,11 @@ public class UserController {
         this.address = address;
     }
 
+    public UserFacade getUserFacade() {
+        return userFacade;
+    }
+
+    public void setUserFacade(UserFacade userFacade) {
+        this.userFacade = userFacade;
+    }
 }
