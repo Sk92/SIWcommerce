@@ -57,7 +57,7 @@ public class UserController {
     }
 
     public String register() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date parsed = null;
         try {
             parsed = format.parse(this.dateOfBirth);
