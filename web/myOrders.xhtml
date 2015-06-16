@@ -3,20 +3,26 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body styleClass="Bimage">
+<style>
+    .Bimage{
+        background-image:url(resources/images/asd.jpg);
+    }
+</style>
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
 
         <ui:repeat value="#{customerController.orderList}" var="order">
             <div class="sm-box">
-                <div>#{order.id}</div>
-                <div>#{order.createdAt}</div>
-                <div>#{order.closedAt}</div>
+                <div><label>id:</label>#{order.id}</div>
+                <div><label>data crezione:</label>#{order.createdAt}</div>
+                <div><label>data chiusura:</label>#{order.closedAt}</div>
                 <ui:repeat value="#{order.orderLines}" var="orderLine">
-                    <div>#{orderLine.product.name}</div>
-                    <div>#{orderLine.quantity}</div>
-                    <div>#{orderLine.sellPrice}</div>
-                    <div>#{orderLine.quantity * orderLine.sellPrice}</div>
+                    <div><label>nome:</label>#{orderLine.product.name}</div>
+                    <div><label>quantità:</label>#{orderLine.quantity}</div>
+                    <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
+                    <div><label>totale:</label>#{orderLine.quantity * orderLine.sellPrice}</div>
                 </ui:repeat>
             </div>
         </ui:repeat>
@@ -25,4 +31,5 @@
 
     </ui:define>
 </ui:composition>
+</h:body>
 </html>

@@ -24,35 +24,39 @@
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <h:inputText value="#{userController.email}" styleClass="form-control"/>
+                                <h:inputText id="email" value="#{userController.email}" styleClass="form-control"  required="true" label="email"/>
+                                <h:message for="email" style="color:red" />
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
-                                <h:inputText value="#{userController.password}" styleClass="form-control"/>
+                                <h:inputText id="password" value="#{userController.password}" styleClass="form-control" required="true" label="password"/>
+                                <h:message for="password" style="color:red" />
                             </div>
 
                             <div class="form-group">
                                 <label>Nome</label>
-                                <h:inputText   value="#{userController.name}" styleClass="form-control">
-                                </h:inputText>
+                                <h:inputText id="nome"  value="#{userController.name}" required="true" styleClass="form-control"  label="nome"/>
+                                <h:message for="nome" style="color:red" />
 
                             </div>
 
                             <div class="form-group">
                                 <label>Cognome</label>
-                                <h:inputText value="#{userController.lastName}" styleClass="form-control"/>
+                                <h:inputText id="cognome" value="#{userController.lastName}" styleClass="form-control" required="true" label="cognome"/>
+                                <h:message for="cognome" style="color:red" />
                             </div>
 
                             <div class="form-group">
                                 <label>Data di nascità(dd/MM/yyyy)</label>
-                                <h:inputText value="#{userController.dateOfBirth}" styleClass="form-control"/>
-
+                                <h:inputText  id="data_di_nascita" value="#{userController.dateOfBirth}" styleClass="form-control" required="true" label="data di nascita" />
+                                <h:message for="data_di_nascita" style="color:red" />
                             </div>
 
                             <div class="form-group">
                                 <label>Indirizzo</label>
-                                <h:inputText value="#{userController.address}" styleClass="form-control"/>
+                                <h:inputText id="indirizzo" value="#{userController.address}" styleClass="form-control" required="true" label="indirizzo"/>
+                                <h:message for="indirizzo" style="color:red" />
                             </div>
 
 

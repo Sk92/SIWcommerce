@@ -4,25 +4,32 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<h:body styleClass="Bimage">
+<style>
+    .Bimage{
+        background-image:url(resources/images/asd.jpg);
+    }
+</style>
 
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
         <div class="container-fluid">
-            <div>#{currentOrderController.currentOrder.createdAt}</div>
+            <div><label>data creazione:</label>#{currentOrderController.currentOrder.createdAt}</div>
 
             <ui:repeat value="#{currentOrderController.currentOrder.orderLines}" var="orderLine">
-                <div>#{orderLine.product.name}</div>
-                <div>#{orderLine.quantity}</div>
-                <div>#{orderLine.sellPrice}</div>
+                <div><label>nome prodotto:</label>#{orderLine.product.name}</div>
+                <div><label>quantità:</label>#{orderLine.quantity}</div>
+                <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
             </ui:repeat>
 
             <h:form>
-                <h:commandLink action="#{currentOrderController.nullifyOrder}" value="Annulla l'ordine" />
                 <h:commandLink action="#{currentOrderController.confirmOrder}" value="Conferma l'ordine" />
             </h:form>
 
-
+            <h:form>
+                <h:commandLink action="#{currentOrderController.nullifyOrder}" value="Annulla l'ordine" />
+            </h:form>
 
         </div>
 
@@ -30,7 +37,7 @@
 
     </ui:define>
 </ui:composition>
-
+</h:body>
 
 
 </html>

@@ -25,12 +25,14 @@
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <h:inputText value="#{userController.email}" styleClass="form-control"/>
+                                <h:inputText id="email" value="#{userController.email}" styleClass="form-control"  required="true" label="email" />
+                                <h:message for="email" style="color:red" />
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
-                                <h:inputSecret value="#{userController.password}" styleClass="form-control"/>
+                                <h:inputSecret id="password" value="#{userController.password}" styleClass="form-control"  required="true" label="password" />
+                                <h:message for="password" style="color:red" />
                             </div>
 
                             <h:commandButton value="login" action="#{userController.login}" styleClass="btn btn-primary"/>

@@ -3,6 +3,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body styleClass="Bimage">
+<style>
+    .Bimage{
+        background-image:url(resources/images/asd.jpg);
+    }
+</style>
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
@@ -12,13 +19,14 @@
         </h:form>
 
         <div class="sm-box">
-            <div>#{orderController.requestedCustomer.user.name}</div>
-            <div>#{orderController.requestedCustomer.user.lastName}</div>
-            <div>#{orderController.requestedCustomer.user.email}</div>
-            <div>#{orderController.requestedCustomer.address}</div>
+            <div><label>nome:</label>#{orderController.requestedCustomer.user.name}</div>
+            <div><label>cognome:</label>#{orderController.requestedCustomer.user.lastName}</div>
+            <div><label>email:</label>#{orderController.requestedCustomer.user.email}</div>
+            <div><label>indirizzo:</label>#{orderController.requestedCustomer.address}</div>
         </div>
 
 
     </ui:define>
 </ui:composition>
+</h:body>
 </html>

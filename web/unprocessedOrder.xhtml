@@ -4,21 +4,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
+<h:body styleClass="Bimage">
+<style>
+    .Bimage{
+        background-image:url(resources/images/asd.jpg);
+    }
+</style>
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
 
         <ui:repeat value="#{orderController.unprocessedOrders}" var="order">
             <div class="sm-box">
-                <div>#{order.id}</div>
-                <div>#{order.createdAt}</div>
-                <div>#{order.processedAt}</div>
-                <div>#{order.closedAt}</div>
+                <div><label>id ordine:</label>#{order.id}</div>
+                <div><label>data creazione:</label>#{order.createdAt}</div>
+                <div><label>data evasione:</label>#{order.processedAt}</div>
+                <div><label>data chiusura:</label>#{order.closedAt}</div>
                 <ui:repeat value="#{order.orderLines}" var="orderLine">
-                    <div>#{orderLine.product.name}</div>
-                    <div>#{orderLine.quantity}</div>
-                    <div>#{orderLine.sellPrice}</div>
+                    <div><label>nome:</label>#{orderLine.product.name}</div>
+                    <div><label>quantità:</label>#{orderLine.quantity}</div>
+                    <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
                 </ui:repeat>
                 <h:form>
                     <h:commandButton action="#{orderController.processOrder}" value="Evadi l'ordine">
@@ -32,7 +37,7 @@
 
     </ui:define>
 </ui:composition>
-
+</h:body>
 
 
 </html>

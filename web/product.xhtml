@@ -10,13 +10,13 @@
 
         <div class="container-fluid">
             <h:graphicImage library="images" name="#{productController.product.id}.jpg" width="200" height="200" />
-            <div>#{productController.product.id}</div>
-            <div>#{productController.product.name}</div>
-            <div>#{productController.product.description}</div>
-            <div>#{productController.product.code}</div>
-            <div>#{productController.product.price}</div>
-            <div>#{productController.product.provider.email}</div>
-            <div>#{productController.product.stockQuantity}</div>
+            <div><label>id:</label>#{productController.product.id}</div>
+            <div><label>nome:</label>#{productController.product.name}</div>
+            <div><label>descrizione:</label>#{productController.product.description}</div>
+            <div><label>codice</label>#{productController.product.code}</div>
+            <div><label>prezzo</label>#{productController.product.price}</div>
+            <div><label>fornitore</label>#{productController.product.provider.email}</div>
+            <div><label>quantità disponibile:</label>#{productController.product.stockQuantity}</div>
 
         </div>
 

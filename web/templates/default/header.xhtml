@@ -22,8 +22,8 @@
                     <li><h:link outcome="index"><span class="glyphicon glyphicon-home gi-margin" />Home</h:link></li>
                     <li><h:link outcome="products"><span class="glyphicon glyphicon-list gi-margin" />Prodotti</h:link></li>
                     <ui:fragment rendered="#{userController.isLoggedIn() and !userController.isAdmin()}">
-                        <li><h:link outcome="currentOrder"><span class="glyphicon glyphicon-cart gi-margin" />Carrello</h:link></li>
-                        <li><h:link outcome="myOrders"/><span class="glyphicon glyphicon-euro gi-margin" />Miei Ordini</li>
+                        <li><h:link outcome="currentOrder"><span class="glyphicon glyphicon-shopping-cart gi-margin" />Carrello</h:link></li>
+                        <li><h:link outcome="myOrders"><span class="glyphicon glyphicon-euro gi-margin" />Miei Ordini</h:link></li>
                     </ui:fragment>
                     <ui:fragment rendered="#{userController.isAdmin()}">
                         <li><h:link outcome="searchCustomer"><span class="glyphicon glyphicon-search gi-margin" />Cerca cliente</h:link></li>
