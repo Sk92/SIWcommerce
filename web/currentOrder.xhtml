@@ -15,9 +15,9 @@
     <ui:define name="content">
 
         <div class="container-fluid">
-            <div><label>data creazione:</label>#{currentOrderController.currentOrder.createdAt}</div>
 
             <ui:repeat value="#{currentOrderController.currentOrder.orderLines}" var="orderLine">
+                <div><label>data creazione:</label>#{currentOrderController.currentOrder.createdAt}</div>
                 <div><label>nome prodotto:</label>#{orderLine.product.name}</div>
                 <div><label>quantità:</label>#{orderLine.quantity}</div>
                 <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>

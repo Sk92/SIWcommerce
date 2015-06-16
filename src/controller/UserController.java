@@ -89,7 +89,7 @@ public class UserController {
         User user = userFacade.createUser( email,  password,  name,  lastName, dateOfBirth, address);
         if (user != null)
             return "index?faces-redirect=true";
-        return "register?faces-redirect=true";
+        return "addCustomer?faces-redirect=true";
     }
 
 
