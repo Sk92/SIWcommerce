@@ -5,6 +5,8 @@ import model.Order;
 import model.OrderLine;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Date;
@@ -58,6 +60,10 @@ public class OrderFacade {
                 orderLine.getProduct().setStockQuantity(orderLine.getProduct().getStockQuantity() - orderLine.getQuantity());
             }
             order.setProcessedAt(new Date(System.currentTimeMillis()));
+        }
+        else {
+            FacesMessage message = new FacesMessage("Non è stato possibile processare l'ordine "+order.getId()+": non tutti i prodotti richiesti sono presenti in magazzino");
+            FacesContext.getCurrentInstance().addMessage("processOrder_"+order.getId(), message);
         }
     }
 }

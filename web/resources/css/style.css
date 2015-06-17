@@ -28,12 +28,12 @@ body {
     text-align: center;
 }
 
-.sm-box .product-description {
-
+.sm-box .product-quantity {
+    float: left;
 }
 
 .sm-box .product-price {
-    text-align: right;
+    float: right;
     color: green;
 }
 

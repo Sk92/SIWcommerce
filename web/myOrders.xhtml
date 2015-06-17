@@ -18,6 +18,7 @@
                     <div><label>id:</label>#{order.id}</div>
                     <div><label>data crezione:</label>#{order.createdAt}</div>
                     <div><label>data chiusura:</label>#{order.closedAt}</div>
+                    <div><label>data evasione:</label>#{order.processedAt}</div>
                     <ui:repeat value="#{order.orderLines}" var="orderLine">
                         <div><label>nome:</label>#{orderLine.product.name}</div>
                         <div><label>quantità:</label>#{orderLine.quantity}</div>

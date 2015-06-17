@@ -31,7 +31,12 @@
                             </h:form>
                         </div>
                         <p class="product-description">#{product.description}</p>
-                        <p class="product-price">#{product.price} €</p>
+                        <div class="clearfix">
+                            <p class="product-price">#{product.price} €</p>
+                            <ui:fragment rendered="#{userController.isAdmin()}">
+                                <p class="product-quantity">Q.tà: #{product.stockQuantity}</p>
+                            </ui:fragment>
+                        </div>
                         <ui:fragment rendered="#{userController.isLoggedIn() and !userController.isAdmin()}">
                              <h:form role="form">
                                  <div class="input-group">

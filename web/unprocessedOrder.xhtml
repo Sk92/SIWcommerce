@@ -11,6 +11,7 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
+        <h:messages style="color:red;margin:8px;" />
 
         <ui:repeat value="#{orderController.unprocessedOrders}" var="order">
             <div class="sm-box">
@@ -23,7 +24,7 @@
                 </ui:repeat>
                 </ul>
                 <h:form>
-                    <h:commandButton action="#{orderController.processOrder}" value="Evadi l'ordine" styleClass="btn btn-default">
+                    <h:commandButton id="processOrder_#{order.id}" action="#{orderController.processOrder}" value="Evadi l'ordine" styleClass="btn btn-default">
                         <f:param name="id" value="#{order.id}" />
                     </h:commandButton>
                 </h:form>
