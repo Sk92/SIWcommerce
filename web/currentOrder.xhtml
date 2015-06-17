@@ -5,6 +5,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
+<f:metadata>
+    <f:event listener="#{userController.checkIsLogged}" type="preRenderView" />
+</f:metadata>
+
+
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
@@ -31,7 +36,11 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{currentOrderController.currentOrder == null}">
-            <p>Non ci sono prodotti nel carrello</p>
+            <div class="panel panel-default panel-centered" style="background: transparent" >
+                <div class="panel-body">
+                    Non ci sono prodotti nel carrello
+                </div>
+            </div>
         </ui:fragment>
 
     </ui:define>

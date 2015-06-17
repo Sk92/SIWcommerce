@@ -7,9 +7,11 @@ import model.Order;
 import model.Product;
 import model.User;
 import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Date;
@@ -41,6 +43,22 @@ public class UserController {
 
     @EJB
     private ProductFacade productFacade;
+
+    public void checkIsAdmin(ComponentSystemEvent event){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (!this.isAdmin()) {
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("index?faces-redirect=true");
+        }
+    }
+
+    public void checkIsLogged(ComponentSystemEvent event){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (!this.isLoggedIn()) {
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("index?faces-redirect=true");
+        }
+    }
 
 
     public String login() {

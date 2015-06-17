@@ -39,7 +39,7 @@ public class CustomerController {
     }
 
     public List<Order> getOrderList() {
-        return userController.getCurrentUser().getCustomer().getOrders();
+        return customerFacade.getOrderList();
     }
 
     public UserController getUserController() {

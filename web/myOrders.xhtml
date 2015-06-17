@@ -4,26 +4,37 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:event listener="#{userController.checkIsLogged}" type="preRenderView" />
+</f:metadata>
+
 
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
+        <ui:fragment rendered="#{customerController.orderList.size() > 0}">
+            <ui:repeat value="#{customerController.orderList}" var="order">
+                <div class="sm-box">
+                    <div><label>id:</label>#{order.id}</div>
+                    <div><label>data crezione:</label>#{order.createdAt}</div>
+                    <div><label>data chiusura:</label>#{order.closedAt}</div>
+                    <ui:repeat value="#{order.orderLines}" var="orderLine">
+                        <div><label>nome:</label>#{orderLine.product.name}</div>
+                        <div><label>quantità:</label>#{orderLine.quantity}</div>
+                        <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
+                        <div><label>totale:</label>#{orderLine.quantity * orderLine.sellPrice}</div>
+                    </ui:repeat>
+                </div>
+            </ui:repeat>
+        </ui:fragment>
 
-        <ui:repeat value="#{customerController.orderList}" var="order">
-            <div class="sm-box">
-                <div><label>id:</label>#{order.id}</div>
-                <div><label>data crezione:</label>#{order.createdAt}</div>
-                <div><label>data chiusura:</label>#{order.closedAt}</div>
-                <ui:repeat value="#{order.orderLines}" var="orderLine">
-                    <div><label>nome:</label>#{orderLine.product.name}</div>
-                    <div><label>quantità:</label>#{orderLine.quantity}</div>
-                    <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
-                    <div><label>totale:</label>#{orderLine.quantity * orderLine.sellPrice}</div>
-                </ui:repeat>
+        <ui:fragment rendered="#{customerController.orderList.size() == 0}">
+            <div class="panel panel-default panel-centered" style="background: transparent" >
+                <div class="panel-body">
+                    Non hai ancora effettuato nessun ordine
+                </div>
             </div>
-        </ui:repeat>
-
-
+        </ui:fragment>
 
     </ui:define>
 </ui:composition>

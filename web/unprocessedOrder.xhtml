@@ -4,6 +4,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:event listener="#{userController.checkIsAdmin}" type="preRenderView" />
+</f:metadata>
+
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
@@ -12,15 +16,14 @@
             <div class="sm-box">
                 <div><label>id ordine:</label>#{order.id}</div>
                 <div><label>data creazione:</label>#{order.createdAt}</div>
-                <div><label>data evasione:</label>#{order.processedAt}</div>
                 <div><label>data chiusura:</label>#{order.closedAt}</div>
+                <ul>
                 <ui:repeat value="#{order.orderLines}" var="orderLine">
-                    <div><label>nome:</label>#{orderLine.product.name}</div>
-                    <div><label>quantità:</label>#{orderLine.quantity}</div>
-                    <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
+                    <li>#{orderLine.quantity} x #{orderLine.product.name} #{orderLine.sellPrice*orderLine.quantity}€</li>
                 </ui:repeat>
+                </ul>
                 <h:form>
-                    <h:commandButton action="#{orderController.processOrder}" value="Evadi l'ordine">
+                    <h:commandButton action="#{orderController.processOrder}" value="Evadi l'ordine" styleClass="btn btn-default">
                         <f:param name="id" value="#{order.id}" />
                     </h:commandButton>
                 </h:form>

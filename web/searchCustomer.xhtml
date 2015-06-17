@@ -4,22 +4,35 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:event listener="#{userController.checkIsAdmin}" type="preRenderView" />
+</f:metadata>
 
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
-        <h:form>
-            <h:inputText value="#{orderController.orderId}" />
-            <h:commandButton action="#{orderController.findCustomerByOrderId}" value="Cerca" />
-        </h:form>
+        <div class="panel panel-default panel-centered">
+            <div class="panel-heading">Cerca cliente</div>
+            <div class="panel-body">
+                <p>Inserisci il codice di un'ordine per recuperare i dettagli del cliente che lo ha effettuato.</p>
+                <h:form styleClass="form-inline">
+                    <div class="form-group">
+                        <label>Codice ordine: </label>
+                        <h:inputText value="#{orderController.orderId}" styleClass="form-control"/>
+                    </div>
+                    <h:commandLink action="#{orderController.findCustomerByOrderId}" title="cerca" styleClass="btn btn-default">
+                        <span class="glyphicon glyphicon-search"/>
+                    </h:commandLink>
+                </h:form>
 
-        <div class="sm-box">
-            <div><label>nome:</label>#{orderController.requestedCustomer.user.name}</div>
-            <div><label>cognome:</label>#{orderController.requestedCustomer.user.lastName}</div>
-            <div><label>email:</label>#{orderController.requestedCustomer.user.email}</div>
-            <div><label>indirizzo:</label>#{orderController.requestedCustomer.address}</div>
+                <ui:fragment rendered="#{orderController.requestedCustomer != null}">
+                    <div><label>nome:</label>#{orderController.requestedCustomer.user.name}</div>
+                    <div><label>cognome:</label>#{orderController.requestedCustomer.user.lastName}</div>
+                    <div><label>email:</label>#{orderController.requestedCustomer.user.email}</div>
+                    <div><label>indirizzo:</label>#{orderController.requestedCustomer.address}</div>
+                </ui:fragment>
+            </div>
         </div>
-
 
     </ui:define>
 </ui:composition>

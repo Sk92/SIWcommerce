@@ -4,48 +4,54 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:event listener="#{userController.checkIsAdmin}" type="preRenderView" />
+</f:metadata>
+
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
-<div class="panel panel-default">
+        <div class="panel panel-default panel-centered">
+            <div class="panel-heading">Aggiungi cliente</div>
+            <div class="panel-body">
 
-        <h:form enctype="multipart/form-data" role="form">
-            <div class="form-group">
-                <label>Nome</label>
-                <h:inputText id="nome" value="#{userController.name}" styleClass="form-control" required="true" label="nome"/>
-                <h:message for="nome" style="color:red" />
+                <h:form enctype="multipart/form-data" role="form">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <h:inputText id="nome" value="#{userController.name}" styleClass="form-control" required="true" label="nome"/>
+                        <h:message for="nome" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                        <label>Cognome</label>
+                        <h:inputText id="cognome" value="#{userController.lastName}" styleClass="form-control" required="true" label="cognome"/>
+                        <h:message for="cognome" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <h:inputText id="email" value="#{userController.email}" styleClass="form-control" required="true" label="email"/>
+                        <h:message for="email" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                    <label>Password</label>
+                    <h:inputText  id="password" alue="#{userController.password}" styleClass="form-control" required="true" label="password"/>
+                        <h:message for="password" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                        <label>Indirizzo</label>
+                        <h:inputText id="indirizzo" value="#{userController.address}" styleClass="form-control" required="true" label="indirizzo"/>
+                        <h:message for="indirizzo" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                        <label>Data di nascita</label>
+                        <h:inputText id="dao" value="#{userController.dateOfBirth}" styleClass="form-control" required="true" label="data di nascita"/>
+                        <h:message for="dao" style="color:red" />
+                    </div>
+                    <div class="form-group">
+                        <h:commandButton value="Inserisci" action="#{userController.addUser}" styleClass="btn btn-primary"/>
+                    </div>
+                </h:form>
             </div>
-            <div class="form-group">
-                <label>Cognome</label>
-                <h:inputText id="cognome" value="#{userController.lastName}" styleClass="form-control" required="true" label="cognome"/>
-                <h:message for="cognome" style="color:red" />
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <h:inputText id="email" value="#{userController.email}" styleClass="form-control" required="true" label="email"/>
-                <h:message for="email" style="color:red" />
-            </div>
-            <div class="form-group">
-            <label>Password</label>
-            <h:inputText  id="password" alue="#{userController.password}" styleClass="form-control" required="true" label="password"/>
-                <h:message for="password" style="color:red" />
         </div>
-            <div class="form-group">
-                <label>Indirizzo</label>
-                <h:inputText id="indirizzo" value="#{userController.address}" styleClass="form-control" required="true" label="indirizzo"/>
-                <h:message for="indirizzo" style="color:red" />
-            </div>
-            <div class="form-group">
-                <label>Data di nascita</label>
-                <h:inputText id="dao" value="#{userController.dateOfBirth}" styleClass="form-control" required="true" label="data di nascita"/>
-                <h:message for="dao" style="color:red" />
-            </div>
-            <div class="form-group">
-                <h:commandButton value="Inserisci" action="#{userController.addUser}" styleClass="btn btn-primary"/>
-            </div>
-        </h:form>
-
-    </div>
 </ui:define>
 </ui:composition>
 </html>

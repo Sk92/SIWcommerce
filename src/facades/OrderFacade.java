@@ -38,7 +38,7 @@ public class OrderFacade {
 
     public Customer findCustomerByOrderId(Long id) {
         List<Order> orderList = em.createNamedQuery("Order.findById", Order.class).setParameter("id", id).getResultList();
-        return orderList.get(0).getCustomer();
+        return (orderList.size() > 0) ? orderList.get(0).getCustomer() : null;
     }
 
     public List<Order> getUnprocessedOrders() {
