@@ -7,9 +7,9 @@
   Il backup del database si trova in "risorse/database.txt".
 
 ### Tecnologie utilizzate
- - JSF
- - Bootstrap
- - AWS
+ - framework JSF
+ - framework Bootstrap
+ - piattaforma cloud AWS
 
 ### Demo
 Demo online su AWS: http://ec2-52-28-127-154.eu-central-1.compute.amazonaws.com:8080/smcommerce/
