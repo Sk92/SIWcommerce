@@ -8,34 +8,28 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
+        <div class="panel panel-primary panel-centered">
+            <div class="panel-heading">Login</div>
+            <div class="panel-body">
+                <h:form role="form">
 
-        <div class="row">
-            <div class="col-xs-8">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Login</div>
-                    <div class="panel-body">
-                        <h:form role="form">
-
-                            <div class="form-group">
-                                <label>Email</label>
-                                <h:inputText id="email" value="#{userController.email}" styleClass="form-control"  required="true" label="email" />
-                                <h:message for="email" style="color:red" />
-                            </div>
-
-                            <div class="form-group">
-                                <label>Password</label>
-                                <h:inputSecret id="password" value="#{userController.password}" styleClass="form-control"  required="true" label="password" />
-                                <h:message for="password" style="color:red" />
-                            </div>
-
-                            <h:commandButton value="login" action="#{userController.login}" styleClass="btn btn-primary"/>
-
-                        </h:form>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <h:inputText id="email" value="#{userController.email}" styleClass="form-control"  required="true" label="email" />
+                        <h:message for="email" style="color:red" />
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <h:inputSecret id="password" value="#{userController.password}" styleClass="form-control"  required="true" label="password" />
+                        <h:message for="password" style="color:red" />
+                    </div>
+
+                    <h:commandButton value="login" action="#{userController.login}" styleClass="btn btn-primary"/>
+
+                </h:form>
             </div>
         </div>
-
 
 
     </ui:define>

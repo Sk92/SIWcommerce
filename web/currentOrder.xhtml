@@ -8,26 +8,31 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
-        <div class="container-fluid">
-
-            <ui:repeat value="#{currentOrderController.currentOrder.orderLines}" var="orderLine">
-                <div><label>data creazione:</label>#{currentOrderController.currentOrder.createdAt}</div>
-                <div><label>nome prodotto:</label>#{orderLine.product.name}</div>
-                <div><label>quantità:</label>#{orderLine.quantity}</div>
-                <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
-            </ui:repeat>
+        <ui:fragment rendered="#{currentOrderController.currentOrder.orderLines.size() > 0}">
+            <div class="clearfix">
+                <ui:repeat value="#{currentOrderController.currentOrder.orderLines}" var="orderLine">
+                    <div class="sm-box">
+                        <div><label>data creazione:</label>#{currentOrderController.currentOrder.createdAt}</div>
+                        <div><label>nome prodotto:</label>#{orderLine.product.name}</div>
+                        <div><label>quantità:</label>#{orderLine.quantity}</div>
+                        <div><label>prezzo unità:</label>#{orderLine.sellPrice}</div>
+                        <div><label>prezzo totale:</label>#{orderLine.sellPrice * orderLine.quantity}</div>
+                    </div>
+                </ui:repeat>
+            </div>
 
             <h:form>
-                <h:commandLink action="#{currentOrderController.confirmOrder}" value="Conferma l'ordine" />
+                <h:commandLink action="#{currentOrderController.nullifyOrder}" value="Annulla l'ordine" styleClass="btn btn-danger"/>
             </h:form>
 
             <h:form>
-                <h:commandLink action="#{currentOrderController.nullifyOrder}" value="Annulla l'ordine" />
+                <h:commandLink action="#{currentOrderController.confirmOrder}" value="Conferma l'ordine" styleClass="btn btn-primary"/>
             </h:form>
+        </ui:fragment>
 
-        </div>
-
-
+        <ui:fragment rendered="#{currentOrderController.currentOrder == null}">
+            <p>Non ci sono prodotti nel carrello</p>
+        </ui:fragment>
 
     </ui:define>
 </ui:composition>

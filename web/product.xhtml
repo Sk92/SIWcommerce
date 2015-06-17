@@ -8,16 +8,16 @@
 <ui:composition template="/templates/default/main.xhtml">
     <ui:define name="content">
 
-        <div class="container-fluid">
-            <h:graphicImage library="images" name="#{productController.product.id}.jpg" width="200" height="200" />
-            <div><label>id:</label>#{productController.product.id}</div>
-            <div><label>nome:</label>#{productController.product.name}</div>
-            <div><label>descrizione:</label>#{productController.product.description}</div>
-            <div><label>codice</label>#{productController.product.code}</div>
-            <div><label>prezzo</label>#{productController.product.price}</div>
-            <div><label>fornitore</label>#{productController.product.provider.email}</div>
-            <div><label>quantità disponibile:</label>#{productController.product.stockQuantity}</div>
-
+        <div class="panel panel-default panel-centered">
+            <div class="panel-heading">#{productController.product.description}</div>
+            <div class="panel-body">
+                <h:graphicImage library="images" name="#{productController.product.id}.jpg" width="200" height="200" />
+                <div><label>codice</label>#{productController.product.code}</div>
+                <div><label>prezzo</label>#{productController.product.price}</div>
+                <div><label>fornitore</label>#{productController.product.provider.email}</div>
+                <div><label>quantità disponibile:</label>#{productController.product.stockQuantity}</div>
+                <div><label>descrizione</label>#{productController.product.description}</div>
+            </div>
         </div>
 
 
