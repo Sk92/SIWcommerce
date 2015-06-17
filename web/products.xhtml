@@ -23,33 +23,35 @@
                 <ui:repeat value="#{productController.productList}" var="product">
                     <div class="sm-box">
                         <h:graphicImage value="images/#{product.id}.jpg" />
-                        <div class="product-name">
-                            <h:form>
-                                <h:commandLink action="#{productController.showProduct}" value="#{product.name}">
-                                    <f:param name="id" value="#{product.id}" />
-                                </h:commandLink>
-                            </h:form>
-                        </div>
-                        <p class="product-description">#{product.description}</p>
-                        <div class="clearfix">
-                            <p class="product-price">#{product.price} €</p>
-                            <ui:fragment rendered="#{userController.isAdmin()}">
-                                <p class="product-quantity">Q.tà: #{product.stockQuantity}</p>
+                        <div class="body">
+                            <div class="product-name">
+                                <h:form>
+                                    <h:commandLink action="#{productController.showProduct}" value="#{product.name}">
+                                        <f:param name="id" value="#{product.id}" />
+                                    </h:commandLink>
+                                </h:form>
+                            </div>
+                            <p class="product-description">#{product.description}</p>
+                            <div class="clearfix">
+                                <p class="product-price">#{product.price} €</p>
+                                <ui:fragment rendered="#{userController.isAdmin()}">
+                                    <p class="product-quantity">Q.tà: #{product.stockQuantity}</p>
+                                </ui:fragment>
+                            </div>
+                            <ui:fragment rendered="#{userController.isLoggedIn() and !userController.isAdmin()}">
+                                 <h:form role="form">
+                                     <div class="input-group">
+                                         <h:inputText value="#{currentOrderController.orderQuantity}" styleClass="form-control">
+                                             <f:ajax event="keyup" listener="#{currentOrderController.setOrderQuantity}"/>
+                                         </h:inputText>
+                                         <h:commandLink action="#{currentOrderController.addProductToOrder}" title="aggiungi al carrello" styleClass="btn btn-default input-group-addon">
+                                             <f:param name="id" value="#{product.id}" />
+                                             <span class="glyphicon glyphicon-shopping-cart" />
+                                         </h:commandLink>
+                                     </div>
+                                </h:form>
                             </ui:fragment>
                         </div>
-                        <ui:fragment rendered="#{userController.isLoggedIn() and !userController.isAdmin()}">
-                             <h:form role="form">
-                                 <div class="input-group">
-                                     <h:inputText value="#{currentOrderController.orderQuantity}" styleClass="form-control">
-                                         <f:ajax event="keyup" listener="#{currentOrderController.setOrderQuantity}"/>
-                                     </h:inputText>
-                                     <h:commandLink action="#{currentOrderController.addProductToOrder}" title="aggiungi al carrello" styleClass="btn btn-default input-group-addon">
-                                         <f:param name="id" value="#{product.id}" />
-                                         <span class="glyphicon glyphicon-shopping-cart" />
-                                     </h:commandLink>
-                                 </div>
-                            </h:form>
-                        </ui:fragment>
                     </div>
                 </ui:repeat>
             </div>
