@@ -40,19 +40,9 @@ public class ProductController {
     }
 
     public void saveImage(Long id) throws IOException {
-        String absoluteWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-        absoluteWebPath = absoluteWebPath.substring(0, absoluteWebPath.indexOf("SIWcommerce")+11);
-        image.write(absoluteWebPath+"/web/resources/images/"+id+".jpg");
-    }
-
-    private static String getFilename(Part part) {
-        for (String cd : part.getHeader("content-disposition").split(";")) {
-            if (cd.trim().startsWith("filename")) {
-                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
-            }
-        }
-        return null;
+        String imagePath = System.getProperty("catalina.base") + "/smcommerceimages";
+        new File(imagePath).mkdirs();
+        image.write(imagePath+"/"+id+".jpg");
     }
 
     public String showProduct() {

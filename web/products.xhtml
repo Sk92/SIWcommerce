@@ -22,7 +22,7 @@
             <div class="clearfix">
                 <ui:repeat value="#{productController.productList}" var="product">
                     <div class="sm-box">
-                        <h:graphicImage library="images" name="#{product.id}.jpg" />
+                        <h:graphicImage value="images/#{product.id}.jpg" />
                         <div class="product-name">
                             <h:form>
                                 <h:commandLink action="#{productController.showProduct}" value="#{product.name}">
