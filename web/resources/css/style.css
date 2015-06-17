@@ -26,9 +26,16 @@ body {
 }
 
 .sm-box .product-name {
-    margin: 1em auto;
+    margin: 0 auto;
+    margin-bottom: 1em;
     font-size: 1.2em;
     text-align: center;
+}
+
+.sm-box .product-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sm-box .product-quantity {
